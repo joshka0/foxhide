@@ -94,6 +94,29 @@ curl -sS http://127.0.0.1:8080/v1/chat/completions \
   }' | jq
 ```
 
+Expected output will look like this:
+
+```json
+{
+  "elapsed_ms": 12,
+  "findings": {
+    "EMAIL": 1,
+    "PHONE": 1
+  },
+  "json_mode": "all_strings",
+  "mode": "echo",
+  "path": "/v1/chat/completions",
+  "redacted": true,
+  "response_rehydration_on": false,
+  "sanitized_body": "{\"messages\":[{\"content\":\"Email me at [EMAIL_1] or call [PHONE_1].\",\"role\":\"user\"}]}",
+  "sanitized_query": ""
+}
+```
+
+`elapsed_ms` and exact finding counts can vary slightly depending on whether
+the optional model sidecar is enabled, but the important signal is
+`redacted: true` and placeholders in `sanitized_body`.
+
 With no `UPSTREAM_BASE_URL`, the proxy returns an echo response showing the
 sanitized request body and finding counts. This is the safest way to verify what
 would be sent upstream.
