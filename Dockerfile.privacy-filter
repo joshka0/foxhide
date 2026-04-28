@@ -1,0 +1,19 @@
+FROM node:22-slim
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PRIVACY_FILTER_HOST=0.0.0.0
+ENV PRIVACY_FILTER_PORT=8090
+ENV PRIVACY_FILTER_CACHE_DIR=/app/.models-cache
+ENV PRIVACY_FILTER_DTYPE=q4
+ENV PRIVACY_FILTER_QUIET=true
+
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable && pnpm install --frozen-lockfile --prod
+
+COPY src ./src
+RUN pnpm privacy:download
+
+EXPOSE 8090
+CMD ["node", "src/privacy-server.mjs"]

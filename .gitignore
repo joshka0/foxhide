@@ -1,0 +1,17 @@
+node_modules/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+*.log
+
+.DS_Store
+
+.venv/
+.venv-*/
+
+models/
+.cache/
+
+*.zip
+pii-proxy/bin/

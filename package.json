@@ -1,0 +1,23 @@
+{
+  "name": "huggingface-model-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "download": "node src/download-model.mjs",
+    "local": "node src/try-model.mjs --local",
+    "privacy": "node src/privacy-filter.mjs",
+    "privacy:bench": "node src/benchmark-privacy-filter.mjs --local --quiet --options '{\"dtype\":\"q4\"}' --args '{\"aggregation_strategy\":\"simple\"}'",
+    "privacy:download": "node src/download-model.mjs --task token-classification --model openai/privacy-filter --options '{\"dtype\":\"q4\"}' --args '{\"aggregation_strategy\":\"simple\"}'",
+    "privacy:local": "node src/privacy-filter.mjs --local --options '{\"dtype\":\"q4\"}'",
+    "privacy:redact": "node src/privacy-filter.mjs --local --redact --quiet --options '{\"dtype\":\"q4\"}'",
+    "privacy:serve": "node src/privacy-server.mjs",
+    "privacy:serve:mlx": "./.venv-mlx-test/bin/python scripts/privacy-filter-mlx-server.py",
+    "try": "node src/try-model.mjs",
+    "models": "node src/try-model.mjs --examples"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^4.2.0"
+  },
+  "devDependencies": {}
+}

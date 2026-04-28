@@ -1,0 +1,27 @@
+{
+  "json_mode": "schema",
+  "include_paths": [
+    "messages.*.content",
+    "messages.*.content.*.text",
+    "input",
+    "input.*.content",
+    "input.*.content.*.text",
+    "prompt",
+    "system",
+    "instructions",
+    "metadata.*"
+  ],
+  "exclude_paths": [
+    "model",
+    "role",
+    "stream",
+    "temperature",
+    "top_p",
+    "max_tokens",
+    "max_completion_tokens",
+    "tools.*.function.name",
+    "functions.*.name"
+  ],
+  "redact_sensitive_json_keys": true,
+  "scrub_plain_text": true
+}
