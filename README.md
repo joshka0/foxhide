@@ -14,6 +14,34 @@ The repo contains two cooperating pieces:
   deterministic recognizers, Gitleaks secret detection, placeholder vaults,
   response rehydration, and upstream forwarding.
 
+## Flow
+
+```text
+Caller / agent / app
+        |
+        v
+  Foxhide Go proxy
+        |
+        +--> deterministic PII rules
+        +--> Gitleaks secret rules
+        +--> optional privacy-filter sidecar
+        |          |
+        |          v
+        |    local ONNX model cache
+        |
+        v
+ sanitized request with stable placeholders
+        |
+        v
+ upstream LLM API or local model server
+        |
+        v
+ optional response scrub / rehydrate
+        |
+        v
+ trusted caller
+```
+
 ## Install
 
 Prerequisites:
